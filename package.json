@@ -1,0 +1,16 @@
+{
+  "name": "dash-css-handbook",
+  "description": "CSS参考手册 for Dash",
+  "author": "asins<asinsimple@gmail.com>",
+  "version": "1.0.1",
+  "scripts": {
+    "build": "node ./parse.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "html-entities": "^1.2.0",
+    "mkdirp": "^0.5.1",
+    "sequelize": "^3.23.6",
+    "sqlite3": "^3.1.4"
+  }
+}
