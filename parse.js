@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const Entities = require('html-entities').XmlEntities;
+const cpy = require('cpy');
 const entities = new Entities();
 const mkdirp = require('mkdirp');
 
@@ -70,9 +71,17 @@ files.forEach((filePath, index) => {
 
 // 复制静态文件
 mkdirp.sync(`${docsetPath}/Documents/skin`);
-fs.createReadStream(`${docPath}/skin/ico.png`).pipe(fs.createWriteStream(`${docsetPath}/Documents/skin/ico.png`));
-fs.createReadStream(`${docPath}/skin/global.css`).pipe(fs.createWriteStream(`${docsetPath}/Documents/skin/global.css`));
-fs.createReadStream(`${docPath}/skin/article.css`).pipe(fs.createWriteStream(`${docsetPath}/Documents/skin/article.css`));
+mkdirp.sync(`${docsetPath}/Documents/properties/background/skin/`);
+cpy([
+	'skin/ico.png',
+	'skin/global.css',
+	'skin/article.css',
+	'properties/background/skin/*.jpg'
+], `${docsetPath}/Documents/`, {cwd: `${docPath}`, parents: true}).then(() => {
+	console.log(`files copied!`);
+}).catch((err)=>{
+	console.log(err);
+});
 // 例子预览功能
 fs.writeFileSync(`${docsetPath}/Documents/skin/inner.js`, `
 var $example = document.getElementById('example');
@@ -89,7 +98,6 @@ $btn.addEventListener('click', function(e){
 	$iframeDoc.close();
 }, false);
 `, 'utf-8');
-
 
 
 

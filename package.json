@@ -8,6 +8,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "cpy": "^4.0.1",
     "html-entities": "^1.2.0",
     "mkdirp": "^0.5.1",
     "sequelize": "^3.23.6",
